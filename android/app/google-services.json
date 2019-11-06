@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "387859196906",
+    "firebase_url": "https://evntown-80b4f.firebaseio.com",
+    "project_id": "evntown-80b4f",
+    "storage_bucket": "evntown-80b4f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:387859196906:android:117a9c1191fdecba8a2093",
+        "android_client_info": {
+          "package_name": "devouda.com.evntown"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "387859196906-9qkc8dilg2oo1m5mt6bsih9sdkgv5th4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFHb5ucXdiEJgXvYwT9iEfZ4qJw9r4bmM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "387859196906-9qkc8dilg2oo1m5mt6bsih9sdkgv5th4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
