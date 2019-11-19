@@ -236,7 +236,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         pass = _passwordEditingText.text;
 
         if (_signUpKey.currentState.validate()) {
-          await fireBaseAuthentication.login(name, pass).then((on) {
+          await fireBaseAuthentication.register(name, pass).then((on) {
             Navigator.pushNamed(context, '/login');
           });
         }

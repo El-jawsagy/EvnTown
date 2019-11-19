@@ -14,12 +14,15 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 //  "assets/images/event_background.jpg",
 //  "assets/images/event_background.jpg",
 //];
-List friends = List.generate(13, (index)=>{
-  "name": names[random.nextInt(10)],
-  "dp": "assets/images/event_background.jpg",
-  "status": "Anything could be here",
-  "isAccept": random.nextBool(),
-});
+List friends = List.generate(
+    13,
+    (index) => {
+          "name": names[random.nextInt(10)],
+          "dp": "assets/images/event_background.jpg",
+          "status": "Anything could be here",
+          "isAccept": random.nextBool(),
+        });
+
 class Event {
   String image;
   String title;
@@ -166,7 +169,6 @@ List names = [
   "mohamed la ",
 ];
 
-
 List events = [
   'cairokee',
   'hossam hekal',
@@ -182,8 +184,6 @@ List events = [
   'Ebrahim el 5oly 1',
   'bladyt El ma7ala'
 ];
-
-
 
 List posts = List.generate(
     13,
@@ -211,10 +211,10 @@ List notifs = [
 List notificationsPeople = List.generate(
     13,
     (index) => {
-          "name": events[random.nextInt(13)],
+          "name": events[random.nextInt(10)],
           "dp": "assets/images/profile_image.jpg",
           "time": "${random.nextInt(50)} min ago",
-          "notif": notifs[random.nextInt(10)]
+          "notif": notifs[random.nextInt(8)]
         });
 
 List notificationsEvent = List.generate(
@@ -226,31 +226,46 @@ List notificationsEvent = List.generate(
           "notif": notifs[random.nextInt(10)]
         });
 
-
-
-class DrawerItem{
+class DrawerItem {
   String titleItem;
   IconData iconItem;
   String screenToGo;
 
   DrawerItem(this.titleItem, this.iconItem, this.screenToGo);
-
 }
 
-
-List<DrawerItem> getItem(){
-  List<DrawerItem> items=[];
-  items.add(DrawerItem("Create Event", Icons.create, '/addEvent'),);
-  items.add(DrawerItem("Events History", Icons.history, '/eventHistory'),);
-  items.add(DrawerItem("Interest Events", Icons.star_border, '/interestEvent'),);
-  items.add(DrawerItem("Notifications", Icons.notifications, '/notification'),);
-  items.add(DrawerItem("Find Friends", Icons.person_add, '/addFriends'),);
-  items.add(DrawerItem("About Us", Icons.help, '/about'),);
-  items.add(DrawerItem("Need Help", FontAwesomeIcons.handsHelping, '/help'),);
-  items.add(DrawerItem("Feedback", Icons.feedback, '/feed'),);
-  items.add(DrawerItem("Logout", FontAwesomeIcons.signOutAlt, '/logOut'),);
+List<DrawerItem> getItem() {
+  List<DrawerItem> items = [];
+  items.add(
+    DrawerItem("Home", Icons.home, '/home'),
+  );
+  items.add(
+    DrawerItem("Stories", Icons.person, '/timeLine'),
+  );
+  items.add(
+    DrawerItem("Explore", Icons.notifications, '/notification'),
+  );
+  items.add(
+    DrawerItem("Today Event", Icons.history, '/today'),
+  );
+  items.add(
+    DrawerItem("Trending Event", Icons.history, '/trending'),
+  );
+  items.add(
+    DrawerItem("Create Event", Icons.create, '/addEvent'),
+  );
+  items.add(
+    DrawerItem("Find Friends", Icons.person_add, '/addFriends'),
+  );
+  items.add(
+    DrawerItem("About Us", Icons.help, '/about'),
+  );
+  items.add(
+    DrawerItem("Feedback", Icons.feedback, '/feed'),
+  );
+  items.add(
+    DrawerItem("Logout", FontAwesomeIcons.signOutAlt, '/logOut'),
+  );
 
   return items;
 }
-
-

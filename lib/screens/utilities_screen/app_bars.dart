@@ -4,7 +4,7 @@ import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 Widget fullAppbar(BuildContext context) {
   return PreferredSize(
-    preferredSize: Size.fromHeight(210.0),
+    preferredSize: Size.fromHeight(170.0),
     child: GradientAppBar(
       flexibleSpace: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -55,9 +55,13 @@ Widget fullAppbar(BuildContext context) {
         colors: [Constants.darkGrayBG, Constants.whiteGrayBG],
       ),
       bottom: PreferredSize(
-        preferredSize: Size.fromHeight(10),
+        preferredSize: Size.fromHeight(20),
         child: Container(
-          margin: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+          constraints: BoxConstraints(
+            maxHeight: MediaQuery.of(context).size.height * 0.1,
+            maxWidth: MediaQuery.of(context).size.width * 0.9,
+          ),
+          margin: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
           padding: EdgeInsets.fromLTRB(15, 5, 15, 0),
           decoration: BoxDecoration(
             color: CustomColors.HeaderGreyLight,
@@ -67,7 +71,7 @@ Widget fullAppbar(BuildContext context) {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
@@ -83,22 +87,44 @@ Widget fullAppbar(BuildContext context) {
                 ],
               ),
               Container(
-                width: MediaQuery.of(context).size.width / 8,
+                width: MediaQuery.of(context).size.width * 0.22,
               ),
-              Container(
-                  constraints: BoxConstraints(
-                      maxHeight: MediaQuery.of(context).size.height / 10,
-                      maxWidth: MediaQuery.of(context).size.width / 2.9),
-                  child: RaisedButton(
-                    child: Text(
-                      " Permote! ",
-                      style: TextStyle(
-                        color: Constants.whiteBG,
+              InkWell(
+                onTap: ()=>{},
+                child: Container(
+                  height:MediaQuery.of(context).size.height *0.05 ,
+                    width: MediaQuery.of(context).size.width *0.2 ,
+                    constraints: BoxConstraints(
+                        maxHeight: MediaQuery.of(context).size.height *0.8,
+                        maxWidth: MediaQuery.of(context).size.width *0.4),
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: <Color>[
+                          Color(0xff264138),Color(0xff263238),
+
+                        ],
                       ),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(8.0),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 1.5,
+                          spreadRadius: 1.5,
+                          offset: Offset(0.0, 0.0),
+                        ),
+                      ],
                     ),
-                    onPressed: () {},
-                    color: Constants.whiteGrayBG,
-                  )),
+                    child: Center(
+                      child: Text(
+                        " Permote! ",
+                        style: TextStyle(
+                          color: Constants.whiteBG,
+                        ),
+                      ),
+                    )),
+              ),
               Container(
                 margin: EdgeInsets.only(bottom: 80),
                 child: Icon(

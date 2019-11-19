@@ -5,6 +5,7 @@ import 'package:evntown/utilities/multi_screen_android.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -24,6 +25,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final _formKey = GlobalKey<FormState>();
 
+  setScreenLocation() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('screenHome', false);
+    await prefs.setBool('screenLoging', true);
+  }
+
   FireBaseAuthentication fireBaseAuthentication;
 
   @override
@@ -32,41 +39,48 @@ class _LoginScreenState extends State<LoginScreen> {
     _emailTextController = TextEditingController();
     fireBaseAuthentication = FireBaseAuthentication();
     super.initState();
+    setScreenLocation();
   }
 
   @override
   Widget build(BuildContext context) {
     DetectedScreen detectedScreen = DetectedScreen(context);
     LoginScreenProperties loginScreenProperties =
-    LoginScreenProperties(detectedScreen);
-
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Form(
-          key: _formKey,
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                _drawLogo(),
-                _drawEditText(Icons.email, 'Email', 'Please enter your email',
-                    loginScreenProperties.editTextSize),
-                giveSpace(.03, context),
-                _drawPasswordEditText(loginScreenProperties.editTextSize),
-                giveSpace(.01, context),
-                _drawForgetPass(loginScreenProperties.forgetTextSize),
-                giveSpace(.03, context),
-                _drawLoginButton(loginScreenProperties.loginTextSize),
-                giveSpace(0.08, context),
-                _drawFacebookButton(
-                    loginScreenProperties.faceAndGoogleTextSize),
-                giveSpace(0.01, context),
-                _drawGoogleButt(loginScreenProperties.faceAndGoogleTextSize),
-                giveSpace(0.07, context),
-                _drawSignUp(loginScreenProperties.signUpText),
-              ],
+        LoginScreenProperties(detectedScreen);
+//WillPopScope make you can control with back button in android
+    return WillPopScope(
+      onWillPop: () {
+        // @pop is function to make us navigation from screen to home android screen system
+        return pop();
+      },
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  _drawLogo(),
+                  _drawEditText(Icons.email, 'Email', 'Please enter your email',
+                      loginScreenProperties.editTextSize),
+                  giveSpace(.03, context),
+                  _drawPasswordEditText(loginScreenProperties.editTextSize),
+                  giveSpace(.01, context),
+                  _drawForgetPass(loginScreenProperties.forgetTextSize),
+                  giveSpace(.03, context),
+                  _drawLoginButton(loginScreenProperties.loginTextSize),
+                  giveSpace(0.08, context),
+                  _drawFacebookButton(
+                      loginScreenProperties.faceAndGoogleTextSize),
+                  giveSpace(0.01, context),
+                  _drawGoogleButt(loginScreenProperties.faceAndGoogleTextSize),
+                  giveSpace(0.07, context),
+                  _drawSignUp(loginScreenProperties.signUpText),
+                ],
+              ),
             ),
           ),
         ),
@@ -76,14 +90,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _drawLogo() {
     return Container(
-      width: MediaQuery
-          .of(context)
-          .size
-          .width * .75,
-      height: MediaQuery
-          .of(context)
-          .size
-          .height * 0.3,
+      width: MediaQuery.of(context).size.width * .75,
+      height: MediaQuery.of(context).size.height * 0.3,
       decoration: BoxDecoration(
           image: DecorationImage(
               image: ExactAssetImage(
@@ -96,14 +104,8 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _drawEditText(IconData icon, String boxName, String validatorText,
       double titleTextSize) {
     return Container(
-      width: MediaQuery
-          .of(context)
-          .size
-          .width * 0.9,
-      height: MediaQuery
-          .of(context)
-          .size
-          .height * 0.085,
+      width: MediaQuery.of(context).size.width * 0.9,
+      height: MediaQuery.of(context).size.height * 0.085,
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(50)),
       child: TextFormField(
         style: TextStyle(fontSize: titleTextSize),
@@ -206,21 +208,14 @@ class _LoginScreenState extends State<LoginScreen> {
             Navigator.pushNamed(context, '/home');
           });
 
-
 //        if (firebaseUser.uid != null) {
         }
         //todo: make controllers empty
         //todo: make page loading after finish and nav to home
       },
       child: Container(
-        width: MediaQuery
-            .of(context)
-            .size
-            .width * .4,
-        height: MediaQuery
-            .of(context)
-            .size
-            .height * .07,
+        width: MediaQuery.of(context).size.width * .4,
+        height: MediaQuery.of(context).size.height * .07,
         decoration: BoxDecoration(
             color: Color(0xff263238), borderRadius: BorderRadius.circular(50)),
         child: Center(
@@ -246,14 +241,8 @@ class _LoginScreenState extends State<LoginScreen> {
         //todo: make page loading after finish and Nav to home
       },
       child: Container(
-        width: MediaQuery
-            .of(context)
-            .size
-            .width * .4,
-        height: MediaQuery
-            .of(context)
-            .size
-            .height * .06,
+        width: MediaQuery.of(context).size.width * .4,
+        height: MediaQuery.of(context).size.height * .06,
         decoration: BoxDecoration(
             color: Color(0xff6081c4), borderRadius: BorderRadius.circular(10)),
         child: Center(
@@ -266,14 +255,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     image: ExactAssetImage("assets/images/facebook_icon.png"),
                   ),
                 ),
-                width: MediaQuery
-                    .of(context)
-                    .size
-                    .width * .09,
-                height: MediaQuery
-                    .of(context)
-                    .size
-                    .height * 0.4,
+                width: MediaQuery.of(context).size.width * .09,
+                height: MediaQuery.of(context).size.height * 0.4,
               ),
               Text(
                 "Facebook ",
@@ -298,14 +281,8 @@ class _LoginScreenState extends State<LoginScreen> {
         //todo: make page loading after finish
       },
       child: Container(
-        width: MediaQuery
-            .of(context)
-            .size
-            .width * .4,
-        height: MediaQuery
-            .of(context)
-            .size
-            .height * .06,
+        width: MediaQuery.of(context).size.width * .4,
+        height: MediaQuery.of(context).size.height * .06,
         decoration: BoxDecoration(
             color: Colors.redAccent, borderRadius: BorderRadius.circular(10)),
         child: Center(
@@ -318,20 +295,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     image: ExactAssetImage("assets/images/google_icon.png"),
                   ),
                 ),
-                width: MediaQuery
-                    .of(context)
-                    .size
-                    .width * .07,
-                height: MediaQuery
-                    .of(context)
-                    .size
-                    .height * 0.3,
+                width: MediaQuery.of(context).size.width * .07,
+                height: MediaQuery.of(context).size.height * 0.3,
               ),
               SizedBox(
-                width: MediaQuery
-                    .of(context)
-                    .size
-                    .width * .04,
+                width: MediaQuery.of(context).size.width * .04,
               ),
               Text(
                 "Google ",
@@ -382,5 +350,9 @@ class _LoginScreenState extends State<LoginScreen> {
     _passwordTextController.dispose();
     _emailTextController.dispose();
     super.dispose();
+  }
+
+  Future<void> pop() async {
+    await SystemChannels.platform.invokeMethod<void>('SystemNavigator.pop');
   }
 }

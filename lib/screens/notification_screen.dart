@@ -6,14 +6,16 @@ class NotificationScreen extends StatefulWidget {
   _NotificationScreenState createState() => _NotificationScreenState();
 }
 
-class _NotificationScreenState extends State<NotificationScreen> with SingleTickerProviderStateMixin{
+class _NotificationScreenState extends State<NotificationScreen>
+    with SingleTickerProviderStateMixin {
+  TabController _tabController;
 
- TabController _tabController;
- @override
+  @override
   void initState() {
-   _tabController  = TabController( length: 3, vsync: this);
-   super.initState();
+    _tabController = TabController(length: 3, vsync: this);
+    super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -27,8 +29,12 @@ class _NotificationScreenState extends State<NotificationScreen> with SingleTick
           centerTitle: true,
           bottom: TabBar(
             tabs: [
-              Tab(text: "people",),
-              Tab(text: "Event",),
+              Tab(
+                text: "people",
+              ),
+              Tab(
+                text: "Event",
+              ),
             ],
           ),
         ),

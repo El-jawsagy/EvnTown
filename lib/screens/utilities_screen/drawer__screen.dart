@@ -1,5 +1,6 @@
 import 'package:evntown/utilities/home_new_method_class/models_exampels.dart';
 import 'package:evntown/utilities/home_new_method_class/theme_const.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DrawerScreen extends StatelessWidget {
@@ -9,52 +10,199 @@ class DrawerScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     drawerItems = getItem();
     return Drawer(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Flexible(
-            fit: FlexFit.tight,
-            flex: 1,
-            child: DrawerHeader(
-              padding: EdgeInsets.only(top: 15),
-              child: Text(
-                "EvnTown",
-                style: TextStyle(
-                  fontWeight: FontWeight.w800,
-                  fontSize: 24,
+      child: Container(
+        constraints: BoxConstraints(
+          maxWidth: MediaQuery.of(context).size.width,
+        ),
+        color: Color(0xff063238),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Flexible(
+                fit: FlexFit.loose,
+                flex: 3,
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        colors: [
+                          Colors.grey,
+                          Colors.blueGrey,
+                        ],
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey.shade800, spreadRadius: .75),
+                      ]),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      CircleAvatar(
+                        backgroundImage: ExactAssetImage(
+                          "assets/images/profile_image.jpg",
+                        ),
+                        radius: 30,
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                "Mahmoud Ragab",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                    shadows: [
+                                      BoxShadow(
+                                        color: Colors.blueGrey,
+                                        blurRadius: 1.5,
+                                      ),
+                                    ]),
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * .03,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: <Widget>[
+                              InkWell(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(7),
+                                    gradient: LinearGradient(
+                                      begin: Alignment.bottomRight,
+                                      end: Alignment.topLeft,
+                                      colors: [
+                                        Colors.blue,
+                                        Colors.blueAccent,
+                                      ],
+                                    ),
+                                  ),
+                                  width:
+                                      MediaQuery.of(context).size.width * .27,
+                                  height:
+                                      MediaQuery.of(context).size.height * .045,
+                                  child: Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(2.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: <Widget>[
+                                          Text(
+                                            "1554 ",
+                                            style: TextStyle(
+                                                fontSize: 10,
+                                                color: Colors.white),
+                                          ),
+                                          Text(
+                                            "Followers",
+                                            style: TextStyle(
+                                                fontSize: 10,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width * .03,
+                              ),
+                              InkWell(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(7),
+                                    gradient: LinearGradient(
+                                      begin: Alignment.bottomRight,
+                                      end: Alignment.topLeft,
+                                      colors: [
+                                        Colors.blueAccent,
+                                        Colors.blue,
+                                      ],
+                                    ),
+                                  ),
+                                  width:
+                                      MediaQuery.of(context).size.width * .27,
+                                  height:
+                                      MediaQuery.of(context).size.height * .045,
+                                  child: Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(2.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: <Widget>[
+                                          Text(
+                                            "2454 ",
+                                            style: TextStyle(
+                                                fontSize: 10,
+                                                color: Colors.white),
+                                          ),
+                                          Text(
+                                            "Followers",
+                                            style: TextStyle(
+                                                fontSize: 10,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.01,
+                      ),
+                    ],
+                  ),
+                )),
+            Flexible(
+              fit: FlexFit.tight,
+              flex: 9,
+              child: Container(
+                color: Color(0xff063238),
+                child: ListView.builder(
+                  itemBuilder: (context, position) {
+                    return InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(
+                            context, drawerItems[position].screenToGo);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 5),
+                        child: ListTile(
+                          title: Text(
+                            drawerItems[position].titleItem,
+                            style: TextStyle(fontSize: 17, color: Colors.white),
+                          ),
+                          trailing: Icon(
+                            drawerItems[position].iconItem,
+                            color: Constants.blue,
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                  itemCount: drawerItems.length,
                 ),
               ),
             ),
-          ),
-          Flexible(
-            fit: FlexFit.tight,
-            flex: 7,
-            child: ListView.builder(
-              itemBuilder: (context, position) {
-                return InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(
-                        context, drawerItems[position].screenToGo);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 5),
-                    child: ListTile(
-                      title: Text(
-                        drawerItems[position].titleItem,
-                        style: TextStyle(fontSize: 17),
-                      ),
-                      trailing: Icon(
-                        drawerItems[position].iconItem,
-                        color: Constants.blue,
-                      ),
-                    ),
-                  ),
-                );
-              },
-              itemCount: drawerItems.length,
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

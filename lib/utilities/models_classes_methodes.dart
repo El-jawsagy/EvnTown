@@ -4,15 +4,19 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 Widget giveSpace(double about, BuildContext context, {bool vertical = false}) {
   if (!vertical) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * about,
+      height: MediaQuery
+          .of(context)
+          .size
+          .height * about,
     );
   }
   return SizedBox(
-    width: MediaQuery.of(context).size.width * about,
+    width: MediaQuery
+        .of(context)
+        .size
+        .width * about,
   );
 }
-
-
 
 class Page {
   IconData iconData;
@@ -151,5 +155,28 @@ List<Choice> categoryIcons() {
   ];
 }
 
+class Category {
+  String name;
+  bool val;
 
+  Category(this.name, this.val);
+}
 
+List<Category> getCategories() {
+  List<Category> Categories = [];
+  Categories.add(Category("Business", false,));
+  Categories.add(Category("Concerts", false,));
+  Categories.add(Category("Trip_Adventures", false));
+  Categories.add(Category("Health & Wellness", false));
+  Categories.add(Category("Workshop", false));
+  Categories.add(Category("Entertainment", false));
+  Categories.add(Category("Sports", false));
+  Categories.add(Category("Art", false));
+  Categories.add(Category("Treatre", false));
+  Categories.add(Category("Crafts", false));
+  Categories.add(Category("Food & Drink", false));
+  Categories.add(Category("Congrtrnces", false));
+  Categories.add(Category("Comedy", false));
+  Categories.add(Category("photography", false));
+  return Categories;
+  }

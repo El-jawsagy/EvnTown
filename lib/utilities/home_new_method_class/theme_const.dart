@@ -74,6 +74,7 @@ class Constants {
     backgroundColor: darkGrayBG,
     primaryColor: lightPrimary,
     accentColor: blue,
+
     cursorColor: blue,
     scaffoldBackgroundColor: darkGrayBG,
     appBarTheme: AppBarTheme(
@@ -96,8 +97,9 @@ class Constants {
     backgroundColor: whiteBG,
     primaryColor: darkPrimary,
     accentColor: darkBlue,
+
     scaffoldBackgroundColor: whiteBG,
-    cursorColor: darkBlue,
+    cursorColor: whiteBG,
     fontFamily: 'rubik',
     appBarTheme: AppBarTheme(
       textTheme: TextTheme(

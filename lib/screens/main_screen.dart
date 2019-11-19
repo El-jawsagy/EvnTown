@@ -6,6 +6,8 @@ import 'package:evntown/screens/timeline_screens/timeline_screen.dart';
 import 'package:evntown/utilities/home_new_method_class/theme_const.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'all_profile_screens/profile_Screen.dart';
 import 'notification_screen.dart';
 
@@ -19,7 +21,11 @@ class _MainScreenState extends State<MainScreen> {
   int _page = 0;
 
   Timer timer;
-  File _image;
+  setScreenLocation() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('screenHome', true);
+    await prefs.setBool('screenLoging', false);
+  }
 
   @override
   void initState() {
@@ -27,11 +33,11 @@ class _MainScreenState extends State<MainScreen> {
     _pageController = PageController(
       initialPage: 0,
     );
+    setScreenLocation();
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: PageView(
         physics: NeverScrollableScrollPhysics(),
@@ -114,7 +120,7 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   void mainBottomSheet(BuildContext context) {
-
+    File _image;
     Future getImage() async {
       var image = await ImagePicker.pickImage(source: ImageSource.gallery);
 
@@ -123,206 +129,12 @@ class _MainScreenState extends State<MainScreen> {
       });
     }
 
-
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
       isScrollControlled: true,
       builder: (BuildContext context) {
-        return Container(
-          height: MediaQuery.of(context).size.height - 80,
-          padding:
-              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-          child: Stack(
-            alignment: AlignmentDirectional.topCenter,
-            children: <Widget>[
-              Positioned(
-                top: MediaQuery.of(context).size.height / 25,
-                left: 0,
-                child: Container(
-                  height: MediaQuery.of(context).size.height,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.elliptical(175, 30),
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                top: MediaQuery.of(context).size.height / 2 - 340,
-                child: Container(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      InkWell(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: Container(
-                          width: 50,
-                          height: 50,
-                          child: Image.asset('assets/images/fab-delete.png'),
-                          decoration: const BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: <Color>[
-                                CustomColors.PurpleLight,
-                                CustomColors.PurpleDark,
-                              ],
-                            ),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(50.0),
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: CustomColors.PurpleShadow,
-                                blurRadius: 10.0,
-                                spreadRadius: 5.0,
-                                offset: Offset(0.0, 0.0),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          SizedBox(height: 10),
-                          Text(
-                            'Add Post',
-                            style: TextStyle(
-                                fontSize: 13, fontWeight: FontWeight.w600),
-                          ),
-                          SizedBox(height: 10),
-                          Container(
-                            width: MediaQuery.of(context).size.width / 1.2,
-                            child: TextFormField(
-                              initialValue: 'Description ',
-                              autofocus: true,
-                              style: TextStyle(
-                                  fontSize: 22, fontStyle: FontStyle.normal),
-                              decoration:
-                                  InputDecoration(border: InputBorder.none),
-                            ),
-                          ),
-                          SizedBox(height: 20),
-                          Container(
-                            constraints: BoxConstraints(
-                              maxHeight:
-                                  MediaQuery.of(context).size.height * 0.2,
-                              maxWidth: MediaQuery.of(context).size.width,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                RaisedButton(
-                                  onPressed: () =>getImage(),
-                                  child: Text(
-                                    "select image",
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(height: 20),
-                          (_image == null )?Container():Container(
-                            width: MediaQuery.of(context).size.width * .8,
-                            height: MediaQuery.of(context).size.height*.3 ,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(7),
-                            ),
-                            child: Image.file(_image,fit: BoxFit.cover,),
-                          ),
-                          Container(
-                            width: MediaQuery.of(context).size.width / 1.2,
-                            child: Text(
-                              'Choose date',
-                              textAlign: TextAlign.left,
-                              style: TextStyle(fontSize: 12),
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          Container(
-                            width: MediaQuery.of(context).size.width / 1.2,
-                            child: Row(
-                              children: <Widget>[
-                                Text(
-                                  'Today, 19: - 21:00',
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                                SizedBox(width: 5),
-                                RotatedBox(
-                                  quarterTurns: 1,
-                                  child: Icon(Icons.chevron_right),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(height: 20),
-                          RaisedButton(
-                            onPressed: () {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => MainScreen()),
-                              );
-                              // Navigator.pop(context);
-                            },
-                            textColor: Colors.white,
-                            padding: const EdgeInsets.all(0.0),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            child: Container(
-                              width: MediaQuery.of(context).size.width / 1.2,
-                              height: 60,
-                              decoration: const BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: <Color>[
-                                    CustomColors.BlueLight,
-                                    CustomColors.BlueDark,
-                                  ],
-                                ),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(8.0),
-                                ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: CustomColors.BlueShadow,
-                                    blurRadius: 2.0,
-                                    spreadRadius: 1.0,
-                                    offset: Offset(0.0, 0.0),
-                                  ),
-                                ],
-                              ),
-                              padding:
-                                  const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                              child: Center(
-                                child: const Text(
-                                  'Add post',
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 20),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        );
+        return _DrawButtonSheet();
       },
     );
   }
@@ -341,5 +153,233 @@ class _MainScreenState extends State<MainScreen> {
     setState(() {
       this._page = page;
     });
+  }
+}
+
+
+class _DrawButtonSheet extends StatefulWidget {
+  @override
+  _DrawButtonSheetState createState() => _DrawButtonSheetState();
+
+}
+
+class _DrawButtonSheetState extends State<_DrawButtonSheet> {
+
+
+  File _image;
+  Future getImage() async {
+    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      _image = image;
+    });
+  }
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: MediaQuery.of(context).size.height - 80,
+      padding:
+      EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+      child: Stack(
+        alignment: AlignmentDirectional.topCenter,
+        children: <Widget>[
+          Positioned(
+            top: MediaQuery.of(context).size.height / 25,
+            left: 0,
+            child: Container(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.elliptical(175, 30),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            top: MediaQuery.of(context).size.height / 2 - 340,
+            child: Container(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Container(
+                      width: 50,
+                      height: 50,
+                      child: Image.asset('assets/images/fab-delete.png'),
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: <Color>[
+                            CustomColors.PurpleLight,
+                            CustomColors.PurpleDark,
+                          ],
+                        ),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(50.0),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: CustomColors.PurpleShadow,
+                            blurRadius: 10.0,
+                            spreadRadius: 5.0,
+                            offset: Offset(0.0, 0.0),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      SizedBox(height: 10),
+                      Text(
+                        'Add Post',
+                        style: TextStyle(
+                            fontSize: 13, fontWeight: FontWeight.w600),
+                      ),
+                      SizedBox(height: 10),
+                      Container(
+                        width: MediaQuery.of(context).size.width / 1.2,
+                        child: TextFormField(
+                          initialValue: 'Description ',
+                          autofocus: true,
+                          style: TextStyle(
+                              fontSize: 22, fontStyle: FontStyle.normal),
+                          decoration:
+                          InputDecoration(border: InputBorder.none),
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      Container(
+                        constraints: BoxConstraints(
+                          maxHeight:
+                          MediaQuery.of(context).size.height * 0.2,
+                          maxWidth: MediaQuery.of(context).size.width,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            RaisedButton(
+                              onPressed: () => getImage(),
+                              child: Text(
+                                "select image",
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      (_image == null)
+                          ? Container(
+                        width: MediaQuery.of(context).size.width * .8,
+                        height:
+                        MediaQuery.of(context).size.height * .3,
+                        decoration: BoxDecoration(
+                          color: Colors.grey,
+                          borderRadius: BorderRadius.circular(7),
+                        ),
+                        child: Center(
+                          child: Row(
+                            mainAxisAlignment:
+                            MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                "swip up after load image ",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              Icon(
+                                Icons.arrow_upward,
+                                color: Colors.white,
+                              )
+                            ],
+                          ),
+                        ),
+                      )
+                          : Container(
+                        width: MediaQuery.of(context).size.width * .8,
+                        height:
+                        MediaQuery.of(context).size.height * .3,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(7),
+                        ),
+                        child: Image.file(
+                          _image,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      RaisedButton(
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MainScreen()),
+                          );
+                          // Navigator.pop(context);
+                        },
+                        textColor: Colors.white,
+                        padding: const EdgeInsets.all(0.0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width / 1.2,
+                          height: 60,
+                          decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: <Color>[
+                                CustomColors.BlueLight,
+                                CustomColors.BlueDark,
+                              ],
+                            ),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(8.0),
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: CustomColors.BlueShadow,
+                                blurRadius: 2.0,
+                                spreadRadius: 1.0,
+                                offset: Offset(0.0, 0.0),
+                              ),
+                            ],
+                          ),
+                          padding:
+                          const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                          child: Center(
+                            child: const Text(
+                              'Add post',
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

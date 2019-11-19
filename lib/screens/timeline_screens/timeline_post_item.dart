@@ -88,23 +88,31 @@ class _PostItemState extends State<PostItem> {
                             fontSize: 11,
                           ),
                         ),
-                        PopupMenuButton<WhyFarther>(
-                          onSelected: (WhyFarther result) {},
-                          itemBuilder: (BuildContext context) =>
-                              <PopupMenuEntry<WhyFarther>>[
-                            const PopupMenuItem<WhyFarther>(
-                              value: WhyFarther.harder,
-                              child: Text('Edit Post'),
-                            ),
-                            const PopupMenuItem<WhyFarther>(
-                              value: WhyFarther.smarter,
-                              child: Text('Copy Link Post'),
-                            ),
-                            const PopupMenuItem<WhyFarther>(
-                              value: WhyFarther.selfStarter,
-                              child: Text('Delet Post'),
-                            ),
-                          ],
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: PopupMenuButton<WhyFarther>(
+                            onSelected: (WhyFarther result) {},
+                            itemBuilder: (BuildContext context) =>
+                                <PopupMenuEntry<WhyFarther>>[
+                              const PopupMenuItem<WhyFarther>(
+                                value: WhyFarther.harder,
+                                child: Text('Edit Post'),
+                              ),
+                              const PopupMenuItem<WhyFarther>(
+                                value: WhyFarther.smarter,
+                                child: Text('Copy Link Post'),
+                              ),
+                              const PopupMenuItem<WhyFarther>(
+                                value: WhyFarther.selfStarter,
+                                child: Text('Delet Post'),
+                              ),
+                            ],
+                            onCanceled: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
                         )
                       ],
                     ),

@@ -22,7 +22,6 @@ class _OnBordingState extends State<OnBording> {
     Page(Icons.group_add, "Be part of EVNTOWN", "Let's find you party"),
   ];
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,6 +43,7 @@ class _OnBordingState extends State<OnBording> {
             padding: const EdgeInsets.only(left: 16.0, top: 24),
             child: InkWell(
               onTap: () {
+                Navigator.pop(context);
                 Navigator.pushNamed(context, "/login");
               },
               child: Text(
@@ -87,6 +87,7 @@ class _OnBordingState extends State<OnBording> {
                     ? Container(
                         width: 200,
                         height: 120,
+                        //todo: make image reload
                         decoration: BoxDecoration(
                           image: DecorationImage(
                               image: ExactAssetImage('assets/images/logo.png'),
@@ -187,4 +188,3 @@ class _OnBordingState extends State<OnBording> {
     );
   }
 }
-

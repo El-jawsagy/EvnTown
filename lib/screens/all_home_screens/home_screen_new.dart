@@ -43,11 +43,11 @@ class _HomeScreenNewState extends State<HomeScreenNew>
     const oneSec = const Duration(seconds: 5);
     timer = new Timer.periodic(
       oneSec,
-          (Timer timer) =>
-              setState(
-            () {
+      (Timer timer) => setState(
+        () {
           if (featurePos < 3) {
-            _featuresController.animateToPage(featurePos + 1,duration: oneSec,curve:Curves.ease );
+            _featuresController.animateToPage(featurePos + 1,
+                duration: oneSec, curve: Curves.ease);
           } else {
             featurePos = 0;
             _featuresController.jumpToPage(featurePos);
@@ -122,7 +122,7 @@ class _HomeScreenNewState extends State<HomeScreenNew>
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
-                  "Category", 
+                  "Category",
                   style: TextStyle(
                     fontSize: 23,
                     fontWeight: FontWeight.w800,
@@ -266,41 +266,74 @@ class _HomeScreenNewState extends State<HomeScreenNew>
                     Radius.circular(5.0),
                   ),
                 ),
-                child: TextField(
-                  style: TextStyle(
-                    fontSize: 15.0,
-                    color: Colors.black,
+                child: InkWell(
+                  onTap: () {
+                    showSearch(
+                      context: context,
+                      delegate: DrawEventSearchPage(),
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 10),
+                    child: Row(
+                      children: <Widget>[
+                        Icon(
+                          Icons.search,
+                          color: Colors.black,
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * .1,
+                        ),
+                        Text(
+                          "Search Events..",
+                          style: TextStyle(
+                            fontSize: 15.0,
+                            color: Colors.black,
+                          ),
+                        ),
+//                      TextField(
+//                        style: TextStyle(
+//                          fontSize: 15.0,
+//                          color: Colors.black,
+//                        ),
+//                        decoration: InputDecoration(
+//                          contentPadding: EdgeInsets.all(10.0),
+//                          border: OutlineInputBorder(
+//                            borderRadius: BorderRadius.circular(5.0),
+//                            borderSide: BorderSide(
+//                              color: Colors.black,
+//                            ),
+//                          ),
+//                          enabledBorder: OutlineInputBorder(
+//                            borderSide: BorderSide(
+//                              color: Colors.white,
+//                            ),
+//                            borderRadius: BorderRadius.circular(5.0),
+//                          ),
+//                          hintText: "Search Events..",
+//                          prefixIcon: Transform.translate(
+//                            offset:
+//                            Offset(-MediaQuery
+//                                .of(context)
+//                                .size
+//                                .width * .02, 0),
+//                            child: Icon(
+//                              Icons.search,
+//                              color: Colors.black,
+//                            ),
+//                          ),
+//                          hintStyle: TextStyle(
+//                            fontSize: 15.0,
+//                            color: Colors.black,
+//                          ),
+//                        ),
+//                        maxLines: 1,
+//                        controller: _homeSearchControl,
+//                      )
+                      ],
+                    ),
                   ),
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.all(10.0),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5.0),
-                      borderSide: BorderSide(
-                        color: Colors.black,
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.white,
-                      ),
-                      borderRadius: BorderRadius.circular(5.0),
-                    ),
-                    hintText: "Search Events..",
-                    prefixIcon: Transform.translate(
-                      offset:
-                          Offset(-MediaQuery.of(context).size.width * .02, 0),
-                      child: Icon(
-                        Icons.search,
-                        color: Colors.black,
-                      ),
-                    ),
-                    hintStyle: TextStyle(
-                      fontSize: 15.0,
-                      color: Colors.black,
-                    ),
-                  ),
-                  maxLines: 1,
-                  controller: _homeSearchControl,
                 ),
               ),
             ],
@@ -524,5 +557,51 @@ class _HomeScreenNewState extends State<HomeScreenNew>
     _featuresController.dispose();
     _homeSearchControl.dispose();
     super.dispose();
+  }
+}
+
+class DrawEventSearchPage extends SearchDelegate {
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    // TODO: implement buildActions
+    return [
+      IconButton(
+        icon: Icon(Icons.clear),
+        onPressed: () {
+          query = '';
+        },
+      )
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    // TODO: implement buildLeading
+    return IconButton(
+      icon: Icon(Icons.arrow_back),
+      onPressed: () {
+        close(context, null);
+      },
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    // TODO: implement buildResults
+    return Container();
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    // TODO: implement buildSuggestions
+    return Center(
+        child: Text(
+      query,
+      style: TextStyle(
+        color: Colors.white,
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
+      ),
+    ));
   }
 }
