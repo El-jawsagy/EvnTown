@@ -217,7 +217,20 @@ class _LoginScreenState extends State<LoginScreen> {
         width: MediaQuery.of(context).size.width * .4,
         height: MediaQuery.of(context).size.height * .07,
         decoration: BoxDecoration(
-            color: Color(0xff263238), borderRadius: BorderRadius.circular(50)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.blueGrey,
+              blurRadius: .75,
+              spreadRadius: .75,
+              offset: Offset(0.0, 0.0),
+            )
+          ],
+          borderRadius: BorderRadius.circular(50),
+          gradient: LinearGradient(colors: [
+            Color(0xff264138),
+            Color(0xff263238),
+          ]),
+        ),
         child: Center(
           child: Text(
             "LOG IN",

@@ -1,6 +1,7 @@
 import 'package:evntown/utilities/home_new_method_class/models_exampels.dart';
 import 'package:evntown/utilities/home_new_method_class/theme_const.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/cupertino.dart' as prefix0;
 import 'package:flutter/material.dart';
 
 class DrawerScreen extends StatelessWidget {
@@ -66,7 +67,7 @@ class DrawerScreen extends StatelessWidget {
                             ],
                           ),
                           SizedBox(
-                            height: MediaQuery.of(context).size.height * .03,
+                            height: MediaQuery.of(context).size.height * .013,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -161,11 +162,68 @@ class DrawerScreen extends StatelessWidget {
                                 ),
                               ),
                             ],
-                          )
+                          ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.01,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                "My Points : 50",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.01,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              InkWell(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(7),
+                                    gradient: LinearGradient(
+                                      begin: Alignment.bottomRight,
+                                      end: Alignment.topLeft,
+                                      colors: [
+                                        Constants.darkGrayBG,
+                                        Constants.darkGrayBG,
+                                      ],
+                                    ),
+                                  ),
+                                  width:
+                                      MediaQuery.of(context).size.width * .22,
+                                  height:
+                                      MediaQuery.of(context).size.height * .045,
+                                  child: Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(2.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: <Widget>[
+                                          Text(
+                                            "Play",
+                                            style: TextStyle(
+                                                fontSize: 14,
+                                                color: Colors.white),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ],
-                      ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.01,
                       ),
                     ],
                   ),
@@ -179,8 +237,11 @@ class DrawerScreen extends StatelessWidget {
                   itemBuilder: (context, position) {
                     return InkWell(
                       onTap: () {
+                        prefix0.Navigator.pop(context);
                         Navigator.pushNamed(
-                            context, drawerItems[position].screenToGo);
+                          context,
+                          drawerItems[position].screenToGo,
+                        );
                       },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 5),

@@ -11,6 +11,7 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final _signUpKey = GlobalKey<FormState>();
+  List<Category> categories;
 
   IconData _icon = Icons.visibility_off;
 
@@ -41,6 +42,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _conformPassEditingText = TextEditingController();
     _emailEditingText = TextEditingController();
     fireBaseAuthentication = FireBaseAuthentication();
+    categories = getCategories();
     super.initState();
   }
 
@@ -87,10 +89,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 _drawPasswordEditText(),
                 giveSpace(0.03, context),
                 _drawConfPasswordEditText(),
+                giveSpace(0.03, context),
+                _drawCategorySelect(),
                 giveSpace(.05, context),
                 _drawSignUpButton(),
                 giveSpace(0.07, context),
                 _drawLogin(),
+                giveSpace(0.03, context),
               ],
             ),
           ),
@@ -224,6 +229,52 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
+  Widget _drawCategorySelect() {
+    return InkWell(
+      onTap: () {
+        setState(() {
+          _drawCategoryTaker();
+        });
+      },
+      child: Container(
+          width: MediaQuery.of(context).size.width * .45,
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.blueGrey,
+                blurRadius: .75,
+                spreadRadius: .75,
+                offset: Offset(0.0, 0.0),
+              )
+            ],
+            borderRadius: BorderRadius.circular(9),
+            gradient: LinearGradient(colors: [
+              Color(0xff264138),
+              Color(0xff263238),
+            ]),
+          ),
+          constraints: BoxConstraints(
+            maxHeight: MediaQuery.of(context).size.height * 0.07,
+            maxWidth: MediaQuery.of(context).size.width * 0.45,
+          ),
+          child: Center(
+              child: Text(
+            "Select Category",
+            style: TextStyle(color: Colors.white),
+          ))),
+    );
+  }
+
+  _drawCategoryTaker() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return DynamicDialog(
+            categoryDialog: categories,
+          );
+        });
+  }
+
   Widget _drawSignUpButton() {
     return InkWell(
       onTap: () async {
@@ -245,7 +296,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
         width: MediaQuery.of(context).size.width * .4,
         height: MediaQuery.of(context).size.height * .07,
         decoration: BoxDecoration(
-            color: Color(0xff263238), borderRadius: BorderRadius.circular(50)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.blueGrey,
+              blurRadius: .75,
+              spreadRadius: .75,
+              offset: Offset(0.0, 0.0),
+            )
+          ],
+          borderRadius: BorderRadius.circular(50),
+          gradient: LinearGradient(colors: [
+            Color(0xff264138),
+            Color(0xff263238),
+          ]),
+        ),
         child: Center(
           child: Text(
             "Sign Up",

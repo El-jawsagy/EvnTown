@@ -49,7 +49,13 @@ class _PostItemState extends State<PostItem> {
           constraints: BoxConstraints.expand(
               height: MediaQuery.of(context).size.height * 0.52),
           decoration: BoxDecoration(
-            color: Color(0xffbbded6),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey,
+                spreadRadius: 1.5,
+              )
+            ],
+            color: Constants.darkGrayBG,
             borderRadius: BorderRadius.all(Radius.circular(12)),
           ),
           child: Column(
@@ -70,6 +76,7 @@ class _PostItemState extends State<PostItem> {
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 12,
+                    color: Colors.white,
                   ),
                 ),
                 trailing: Padding(
@@ -86,33 +93,33 @@ class _PostItemState extends State<PostItem> {
                           style: TextStyle(
                             fontWeight: FontWeight.w300,
                             fontSize: 11,
+                            color: Colors.white,
                           ),
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: PopupMenuButton<WhyFarther>(
-                            onSelected: (WhyFarther result) {},
-                            itemBuilder: (BuildContext context) =>
-                                <PopupMenuEntry<WhyFarther>>[
-                              const PopupMenuItem<WhyFarther>(
-                                value: WhyFarther.harder,
-                                child: Text('Edit Post'),
-                              ),
-                              const PopupMenuItem<WhyFarther>(
-                                value: WhyFarther.smarter,
-                                child: Text('Copy Link Post'),
-                              ),
-                              const PopupMenuItem<WhyFarther>(
-                                value: WhyFarther.selfStarter,
-                                child: Text('Delet Post'),
-                              ),
-                            ],
-                            onCanceled: () {
-                              Navigator.of(context).pop();
-                            },
+                        PopupMenuButton<WhyFarther>(
+                          icon: Icon(
+                            Icons.more_vert,
+                            color: Colors.white,
                           ),
+                          onSelected: (WhyFarther result) {},
+                          itemBuilder: (BuildContext context) =>
+                              <PopupMenuEntry<WhyFarther>>[
+                            const PopupMenuItem<WhyFarther>(
+                              value: WhyFarther.harder,
+                              child: Text('Edit Post'),
+                            ),
+                            const PopupMenuItem<WhyFarther>(
+                              value: WhyFarther.smarter,
+                              child: Text('Copy Link Post'),
+                            ),
+                            const PopupMenuItem<WhyFarther>(
+                              value: WhyFarther.selfStarter,
+                              child: Text('Delet Post'),
+                            ),
+                          ],
+                          onCanceled: () {
+                            Navigator.of(context).pop();
+                          },
                         )
                       ],
                     ),
@@ -150,7 +157,7 @@ class _PostItemState extends State<PostItem> {
                           onTap: () {},
                           child: Icon(
                             FontAwesomeIcons.thumbsUp,
-                            color: Colors.blueGrey.shade800,
+                            color: Colors.white,
                             size: 25,
                           ),
                         ),
@@ -161,7 +168,7 @@ class _PostItemState extends State<PostItem> {
                           onTap: () {},
                           child: Icon(
                             FontAwesomeIcons.comment,
-                            color: Colors.blueGrey.shade800,
+                            color: Colors.white,
                           ),
                         ),
                         SizedBox(
@@ -171,7 +178,7 @@ class _PostItemState extends State<PostItem> {
                           onTap: () {},
                           child: Icon(
                             FontAwesomeIcons.share,
-                            color: Colors.blueGrey.shade800,
+                            color: Colors.white,
                           ),
                         )
                       ],
@@ -183,12 +190,18 @@ class _PostItemState extends State<PostItem> {
                             Text(
                               "View All Comments",
                               style: TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.w600),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                              ),
                             ),
                             Text(
                               "(",
                               style: TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.w600),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                              ),
                             ),
                             Text(
                               "$total",
@@ -200,7 +213,10 @@ class _PostItemState extends State<PostItem> {
                             Text(
                               ")",
                               style: TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.w600),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                              ),
                             )
                           ],
                         ))

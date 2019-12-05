@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:evntown/screens/utilities_screen/app_bars.dart';
+import 'package:evntown/screens/utilities_screen/our_fetures.dart';
 import 'package:evntown/utilities/home_new_method_class/theme_const.dart';
 import 'package:evntown/utilities/models_classes_methodes.dart';
 import 'package:flutter/material.dart';
@@ -8,11 +9,8 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../main_screen.dart';
-
 class CreateEvent extends StatefulWidget {
-  CreateEvent({Key key}) : super(key: key);
-
+  @override
   _CreateEventState createState() => _CreateEventState();
 }
 
@@ -95,7 +93,7 @@ class _CreateEventState extends State<CreateEvent> {
               SizedBox(
                 height: MediaQuery.of(context).size.height * .02,
               ),
-              _drawDataTicker(_enddate,start: false),
+              _drawDataTicker(_enddate, start: false),
               SizedBox(
                 height: MediaQuery.of(context).size.height * .02,
               ),
@@ -273,8 +271,7 @@ class _CreateEventState extends State<CreateEvent> {
         });
   }
 
-  Widget _drawDataTicker(String title,{bool start = true}) {
-
+  Widget _drawDataTicker(String title, {bool start = true}) {
     //todo: make user can't select end time lower than start time
     return RaisedButton(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
@@ -286,15 +283,16 @@ class _CreateEventState extends State<CreateEvent> {
             ),
             showTitleActions: true,
             minTime: DateTime.now(),
-            maxTime: DateTime(DateTime.now().year +2, 12, 31), onConfirm: (date) {
+            maxTime: DateTime(DateTime.now().year + 2, 12, 31),
+            onConfirm: (date) {
           print('confirm $date');
           title = '${date.year} - ${date.month} - ${date.day}';
           setState(() {
-             if(start){
-               _startdate =title;
-             }else{
-               _enddate =title;
-             }
+            if (start) {
+              _startdate = title;
+            } else {
+              _enddate = title;
+            }
           });
         }, currentTime: DateTime.now(), locale: LocaleType.en);
       },
@@ -329,7 +327,9 @@ class _CreateEventState extends State<CreateEvent> {
             Text(
               "  Change",
               style: TextStyle(
-                  color: Color(0xff263238), fontWeight: FontWeight.bold, fontSize: 18.0),
+                  color: Color(0xff263238),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18.0),
             ),
           ],
         ),
@@ -369,7 +369,7 @@ class _CreateEventState extends State<CreateEvent> {
       onTap: () {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => MainScreen()),
+          MaterialPageRoute(builder: (context) => OurFeatures()),
         );
       },
       child: Container(
@@ -397,104 +397,12 @@ class _CreateEventState extends State<CreateEvent> {
         ),
         child: Center(
           child: const Text(
-            'Add Event',
+            'Next',
             style: TextStyle(
                 fontSize: 18, fontWeight: FontWeight.w500, color: Colors.white),
           ),
         ),
       ),
-    );
-  }
-
-  @override
-  void dispose() {
-    _eventLocationController.dispose();
-    _eventImage.delete();
-    _eventDescriptionController.dispose();
-    _eventNameController.dispose();
-
-    super.dispose();
-  }
-}
-
-class DynamicDialog extends StatefulWidget {
-  final List<Category> categoryDialog;
-
-  DynamicDialog({this.categoryDialog});
-
-  @override
-  _DynamicDialogState createState() => _DynamicDialogState();
-}
-
-class _DynamicDialogState extends State<DynamicDialog> {
-  List<Category> _categoryDialog;
-
-  @override
-  void initState() {
-    _categoryDialog = widget.categoryDialog;
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      backgroundColor: Color(0xff263238),
-      title: Text(
-        'select category',
-        style: TextStyle(color: Colors.white),
-        textAlign: TextAlign.center,
-      ),
-      content: ListView(
-        children: <Widget>[
-          _drawRowOfCategory(0, _categoryDialog),
-          _drawRowOfCategory(1, _categoryDialog),
-          _drawRowOfCategory(2, _categoryDialog),
-          _drawRowOfCategory(3, _categoryDialog),
-          _drawRowOfCategory(4, _categoryDialog),
-          _drawRowOfCategory(5, _categoryDialog),
-          _drawRowOfCategory(6, _categoryDialog),
-          _drawRowOfCategory(7, _categoryDialog),
-          _drawRowOfCategory(8, _categoryDialog),
-          _drawRowOfCategory(9, _categoryDialog),
-          _drawRowOfCategory(10, _categoryDialog),
-          _drawRowOfCategory(11, _categoryDialog),
-          _drawRowOfCategory(12, _categoryDialog),
-          _drawRowOfCategory(13, _categoryDialog),
-        ],
-      ),
-      actions: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            MaterialButton(
-              onPressed: () {
-                Navigator.of(context).pop(context);
-              },
-              child: Text('Done'),
-            ),
-          ],
-        )
-      ],
-    );
-  }
-
-  _drawRowOfCategory(int pos, List<Category> categories) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Text(
-          categories[pos].name,
-          style: TextStyle(color: Colors.white),
-        ),
-        Switch(
-          value: categories[pos].val,
-          onChanged: (value) {
-            setState(() {
-              categories[pos].val = value;
-            });
-          },
-        )
-      ],
     );
   }
 }

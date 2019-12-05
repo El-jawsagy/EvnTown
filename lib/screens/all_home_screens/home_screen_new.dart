@@ -1,8 +1,10 @@
 import 'dart:async';
 
 import 'package:dots_indicator/dots_indicator.dart';
-import 'package:evntown/screens/all_home_screens/trending_event.dart';
-import 'package:evntown/screens/all_home_screens/trending_event_item.dart';
+import 'package:evntown/screens/all_category_screen/categories_screen.dart';
+import 'package:evntown/screens/event_screens/today_event.dart';
+import 'package:evntown/screens/event_screens/trending_event.dart';
+import 'package:evntown/screens/event_screens/trending_event_item.dart';
 import 'package:evntown/screens/utilities_screen/drawer__screen.dart';
 import 'package:evntown/utilities/home_new_method_class/models_exampels.dart';
 import 'package:evntown/utilities/home_new_method_class/theme_const.dart';
@@ -22,6 +24,8 @@ class _HomeScreenNewState extends State<HomeScreenNew>
 
   PageController _featuresController;
 
+  @override
+  bool get wantKeepAlive => true;
   int featurePos = 1;
 
   List<Feature> _featuresIcons = [];
@@ -147,13 +151,13 @@ class _HomeScreenNewState extends State<HomeScreenNew>
                     ],
                   ),
                   onPressed: () {
-//                    Navigator.of(context).push(
-//                      MaterialPageRoute(
-//                        builder: (BuildContext context){
-//                          return DishesScreen();
-//                        },
-//                      ),
-//                    );
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return CategoriesScreen();
+                        },
+                      ),
+                    );
                   },
                 ),
               ],
@@ -194,13 +198,13 @@ class _HomeScreenNewState extends State<HomeScreenNew>
                     ],
                   ),
                   onPressed: () {
-//                    Navigator.of(context).push(
-//                      MaterialPageRoute(
-//                        builder: (BuildContext context){
-//                          return DishesScreen();
-//                        },
-//                      ),
-//                    );
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return TodayEventScreen();
+                        },
+                      ),
+                    );
                   },
                 ),
               ],
@@ -231,9 +235,6 @@ class _HomeScreenNewState extends State<HomeScreenNew>
       ),
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 
   Widget _drawEventSearchBar() {
     return PreferredSize(
@@ -292,45 +293,6 @@ class _HomeScreenNewState extends State<HomeScreenNew>
                             color: Colors.black,
                           ),
                         ),
-//                      TextField(
-//                        style: TextStyle(
-//                          fontSize: 15.0,
-//                          color: Colors.black,
-//                        ),
-//                        decoration: InputDecoration(
-//                          contentPadding: EdgeInsets.all(10.0),
-//                          border: OutlineInputBorder(
-//                            borderRadius: BorderRadius.circular(5.0),
-//                            borderSide: BorderSide(
-//                              color: Colors.black,
-//                            ),
-//                          ),
-//                          enabledBorder: OutlineInputBorder(
-//                            borderSide: BorderSide(
-//                              color: Colors.white,
-//                            ),
-//                            borderRadius: BorderRadius.circular(5.0),
-//                          ),
-//                          hintText: "Search Events..",
-//                          prefixIcon: Transform.translate(
-//                            offset:
-//                            Offset(-MediaQuery
-//                                .of(context)
-//                                .size
-//                                .width * .02, 0),
-//                            child: Icon(
-//                              Icons.search,
-//                              color: Colors.black,
-//                            ),
-//                          ),
-//                          hintStyle: TextStyle(
-//                            fontSize: 15.0,
-//                            color: Colors.black,
-//                          ),
-//                        ),
-//                        maxLines: 1,
-//                        controller: _homeSearchControl,
-//                      )
                       ],
                     ),
                   ),
@@ -487,6 +449,13 @@ class _HomeScreenNewState extends State<HomeScreenNew>
               padding: const EdgeInsets.all(8.0),
               child: Container(
                 decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Constants.gray,
+                      spreadRadius: 1.5,
+                      blurRadius: 1.5,
+                    ),
+                  ],
                   borderRadius: BorderRadius.circular(7),
                   color: feat[position].backgroundColor,
                 ),
@@ -498,6 +467,7 @@ class _HomeScreenNewState extends State<HomeScreenNew>
                       right: MediaQuery.of(context).size.width * 0.2,
                       top: MediaQuery.of(context).size.height * .02,
                       child: CircleAvatar(
+                        backgroundColor: Constants.blue,
                         child: Icon(
                           feat[position].iconData,
                           size: 50,
@@ -541,7 +511,7 @@ class _HomeScreenNewState extends State<HomeScreenNew>
               position: featurePos,
               decorator: DotsDecorator(
                 color: Colors.white,
-                activeColor: Colors.blue,
+                activeColor: Constants.darkGrayBG,
                 size: Size(7, 7),
               ),
             ),

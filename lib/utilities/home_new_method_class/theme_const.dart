@@ -69,6 +69,7 @@ class Constants {
   static Color whiteBG = Colors.white;
   static Color ratingBG = Colors.yellow[600];
   static Color lightGray = Colors.white70;
+  static Color gray = Colors.grey;
 
   static ThemeData lightTheme = ThemeData(
     backgroundColor: darkGrayBG,

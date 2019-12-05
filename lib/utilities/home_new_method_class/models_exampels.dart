@@ -14,6 +14,31 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 //  "assets/images/event_background.jpg",
 //  "assets/images/event_background.jpg",
 //];
+
+class PagesForPopup {
+  static String addEvent = 'addEvent';
+  static String eventHistory = 'eventHistory';
+  static String settings = 'settings';
+  static String notification = 'notification';
+  static String addFriends = 'addFriends';
+  static String about = 'about';
+  static String help = 'help';
+  static String feed = 'feed';
+  static String cancel = 'cancel';
+
+  static List<String> pages = [
+    addEvent,
+    eventHistory,
+    settings,
+    notification,
+    addFriends,
+    about,
+    help,
+    feed,
+    cancel,
+  ];
+}
+
 List friends = List.generate(
     13,
     (index) => {
@@ -269,3 +294,52 @@ List<DrawerItem> getItem() {
 
   return items;
 }
+
+List messages = [
+  "Hey, how are you doing?",
+  "Are you available tomorrow?",
+  "It's late. Go to bed!",
+  "This cracked me up 😂😂",
+  "Flutter Rocks!!!",
+  "The last rocket🚀",
+  "Griezmann signed for Barca❤️❤️",
+  "Will you be attending the meetup tomorrow?",
+  "Are you angry at something?",
+  "Let's make a UI serie.",
+  "Can i hear your voice?",
+];
+
+List groups = List.generate(
+    13,
+    (index) => {
+          "name": "Group ${random.nextInt(20)}",
+          "dp": "assets/images/profile_image.jpg",
+          "msg": messages[random.nextInt(10)],
+          "counter": random.nextInt(20),
+          "time": "${random.nextInt(50)} min ago",
+          "isOnline": random.nextBool(),
+        });
+
+List chats = List.generate(
+    13,
+    (index) => {
+          "name": names[random.nextInt(10)],
+          "dp": "assets/images/profile_image.jpg",
+          "msg": messages[random.nextInt(10)],
+          "counter": random.nextInt(20),
+          "time": "${random.nextInt(50)} min ago",
+          "isOnline": random.nextBool(),
+        });
+
+List types = ["text", "image"];
+List conversation = List.generate(
+    10,
+    (index) => {
+          "username": "Group ${random.nextInt(20)}",
+          "time": "${random.nextInt(50)} min ago",
+          "type": types[random.nextInt(2)],
+          "replyText": messages[random.nextInt(10)],
+          "isMe": random.nextBool(),
+          "isGroup": false,
+          "isReply": random.nextBool(),
+        });

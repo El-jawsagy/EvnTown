@@ -1,14 +1,17 @@
-import 'package:evntown/screens/all_home_screens/trending_event.dart';
 import 'package:evntown/screens/all_profile_screens/add_freind_screen.dart';
+import 'package:evntown/screens/all_profile_screens/display_follower_screen.dart';
+import 'package:evntown/screens/all_profile_screens/settings_screen.dart';
 import 'package:evntown/screens/auth_screen/login_screen.dart';
 import 'package:evntown/screens/auth_screen/signup_screen.dart';
 import 'package:evntown/screens/event_screens/create_event.dart';
 import 'package:evntown/screens/event_screens/display_single_event.dart';
 import 'package:evntown/screens/event_screens/event_history.dart';
 import 'package:evntown/screens/event_screens/interest_event.dart';
+import 'package:evntown/screens/event_screens/trending_event.dart';
 import 'package:evntown/screens/main_screen.dart';
 import 'package:evntown/screens/notification_screen.dart';
 import 'package:evntown/screens/onbording.dart';
+import 'package:evntown/screens/social_screen/chat_screen.dart';
 import 'package:evntown/screens/timeline_screens/timeline_screen.dart';
 import 'package:evntown/screens/utilities_screen/about_us.dart';
 import 'package:evntown/screens/utilities_screen/feedback_screen.dart';
@@ -53,9 +56,11 @@ class _EvnTownState extends State<EvnTown> {
       child: MaterialApp(
         routes: {
           '/home': (context) => MainScreen(),
-          '/timeLine': (context) => TimeLineScreen(),
+          '/settings': (context) => SettingsScreen(),
+          '/timeL ine': (context) => TimeLineScreen(),
           '/trending': (context) => Trending(),
           '/today': (context) => Trending(),
+          'friends': (context) => DisplayFriendsScreen(),
           '/singleEvent': (context) => SingleEventScreen(),
           '/signUp': (context) => SignUpScreen(),
           '/login': (context) => LoginScreen(),
@@ -63,9 +68,10 @@ class _EvnTownState extends State<EvnTown> {
           '/eventHistory': (context) => EventHistory(),
           '/interestEvent': (context) => InterestEvent(),
           '/notification': (context) => NotificationScreen(),
-          '/addFriends': (context) => FriendScreen(),
+          '/addFriends': (context) => AddFriendScreen(),
           '/about': (context) => AboutUsScreen(),
           '/help': (context) => HelpScreen(),
+          '/chat': (context) => ChatsScreen(),
           '/feed': (context) => FeedbackScreen(),
           '/logOut': (context) => LoginScreen(),
         },

@@ -68,9 +68,9 @@ Widget fullAppbar(BuildContext context) {
             borderRadius: BorderRadius.circular(5.0),
           ),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Column(
+              Column (
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -85,53 +85,6 @@ Widget fullAppbar(BuildContext context) {
                     height: 3,
                   ),
                 ],
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width * 0.22,
-              ),
-              InkWell(
-                onTap: ()=>{},
-                child: Container(
-                  height:MediaQuery.of(context).size.height *0.05 ,
-                    width: MediaQuery.of(context).size.width *0.2 ,
-                    constraints: BoxConstraints(
-                        maxHeight: MediaQuery.of(context).size.height *0.8,
-                        maxWidth: MediaQuery.of(context).size.width *0.4),
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: <Color>[
-                          Color(0xff264138),Color(0xff263238),
-
-                        ],
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(8.0),
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 1.5,
-                          spreadRadius: 1.5,
-                          offset: Offset(0.0, 0.0),
-                        ),
-                      ],
-                    ),
-                    child: Center(
-                      child: Text(
-                        " Permote! ",
-                        style: TextStyle(
-                          color: Constants.whiteBG,
-                        ),
-                      ),
-                    )),
-              ),
-              Container(
-                margin: EdgeInsets.only(bottom: 80),
-                child: Icon(
-                  Icons.clear,
-                  color: Colors.white,
-                  size: 18.0,
-                ),
               ),
             ],
           ),

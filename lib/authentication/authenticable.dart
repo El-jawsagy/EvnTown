@@ -1,21 +1,12 @@
-import 'package:evntown/user/user.dart';
+import 'package:evntown/models/user/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class Authenticatable{
+class Authenticatable {
+  Future<FirebaseUser> register(String email, String password) {}
 
-  Future<FirebaseUser> register( String email,String password ){
+  Future<FirebaseUser> login(String email, String password) {}
 
-  }
+  Future<void> resetPassword(String email) {}
 
-  Future<FirebaseUser> login( String email,String password ){
-
-  }
-
-  Future<void> resetPassword( String email ){
-
-  }
-
-  Future<User> updateProfile(User user){
-
-  }
+  Future<User> updateProfile(User user) {}
 }

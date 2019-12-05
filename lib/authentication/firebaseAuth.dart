@@ -1,4 +1,4 @@
-import 'package:evntown/user/user.dart';
+import 'package:evntown/models/user/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FireBaseAuthentication {
